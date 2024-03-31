@@ -44,7 +44,7 @@ performance and security in the deduplication process.
 
 ## System diagram
 
-![System_diagram](https://ibb.co/h2QyRLN)
+![System_diagram](https://github.com/jipi2/Secure_Data_Deduplication/assets/100122693/53d8c0c0-78f8-4cba-af94-56af5005c828)
 
 ## Repo Structure
 
