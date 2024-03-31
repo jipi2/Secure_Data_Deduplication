@@ -44,7 +44,7 @@ performance and security in the deduplication process.
 
 ## System diagram
 
-![System_diagram](System_Diagram.png)
+![System_diagram](https://ibb.co/h2QyRLN)
 
 ## Repo Structure
 
