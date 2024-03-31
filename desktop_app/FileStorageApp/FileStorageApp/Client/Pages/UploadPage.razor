@@ -1,0 +1,281 @@
+﻿@page "/uploadPage"
+@using System.Net
+@using System.Diagnostics;
+@attribute [Authorize]
+
+<h3>Upload File here:</h3>
+<InputFile OnChange="@LoadFiles" class="form-control" accept=".png,.jpg,.jpeg, .pdf" />
+
+@code {
+
+    private CryptoService _cryptoService = new CryptoService();
+
+    [CascadingParameter] private Task<AuthenticationState> authenticationStateTask { get; set; }
+
+    private bool isAuthenticated;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await authenticationStateTask;
+        isAuthenticated = authState.User.Identity.IsAuthenticated;
+
+        if (!isAuthenticated)
+        {
+            // Redirect to the login page or another page for unauthenticated users
+            Navigation.NavigateTo("/Login");
+        }
+
+        if (await LocalStorage.GetItemAsync<string>("Base64SymKey") == null)
+        {
+            string token = await LocalStorage.GetItemAsync<string>("token");
+            Http.DefaultRequestHeaders.Remove("Authorization");
+            Http.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+
+            var result = await Http.GetAsync("api/File/dfParameters");
+
+            if(result.IsSuccessStatusCode)
+            {
+                DFparametersDto dfParams = await result.Content.ReadFromJsonAsync<DFparametersDto>();
+                CryptoParams stringKeys = await _cryptoService.GenerateKeys(dfParams);
+                // await LocalStorage.SetItemAsync("PublicKey", stringKeys.Public);
+                // await LocalStorage.SetItemAsync("PrivateKey", stringKeys.Private);
+                await LocalStorage.SetItemAsync("Base64SymKey", stringKeys.SymKey);
+                await LocalStorage.SetItemAsync("A", stringKeys.A);
+                var res = await Http.PostAsJsonAsync("api/File/DFexchange", stringKeys.A);
+                Console.WriteLine(res.Content.ToString());
+
+            }
+            else
+            {
+
+            }
+        }
+    }
+
+    private async Task<FileParamsDto> GetFileParams(byte[] bytesFile, IBrowserFile file)
+    {
+        string base64File = Convert.ToBase64String(bytesFile);
+        string base64KeyAndIv = await _cryptoService.GetHashInBase64(bytesFile, 512);
+        string base64Key = await _cryptoService.ExtractKey(Convert.FromBase64String(base64KeyAndIv), 32);
+        string base64Iv = await _cryptoService.ExtractIv(Convert.FromBase64String(base64KeyAndIv), 32, 16);
+        string base64EncFile = await _cryptoService.GetEcnryptedFileBase64(base64Key, base64Iv, bytesFile);
+        //string base64EncFile = Encoding.UTF8.GetString(bytesFile); //linia asta trebuie eliminata dupa masurare
+        string TAG = await _cryptoService.GetHashInBase64(Convert.FromBase64String(base64EncFile), 256);
+        string symKey = await LocalStorage.GetItemAsync<string>("Base64SymKey");
+        FileParamsDto fileParams = await _cryptoService.GetEncryptedFileParameters(TAG, base64Key, base64Iv, symKey, file.Name);
+
+        fileParams.base64EncFile= base64EncFile;
+
+
+        return fileParams;
+    }
+
+    private async Task LoadFiles(InputFileChangeEventArgs e)
+    {
+        var file = e.GetMultipleFiles().FirstOrDefault();
+        long maxFileSize = 200000 * 1024 * 10;
+        Stream streamFile = file.OpenReadStream(maxFileSize); 
+        string outputFilePath = "output.txt";
+
+
+        // Create the output file and open it for writing
+        using (FileStream outputFileStream = new FileStream(outputFilePath, FileMode.Create))
+        {
+            // Create a buffer for reading data
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+
+            // Read from the input file and write to the output file
+            while ((bytesRead = await streamFile.ReadAsync(buffer, 0, buffer.Length)) > 0)
+            {
+                // Write the read data to the output file
+                try { 
+                    await outputFileStream.WriteAsync(buffer, 0, bytesRead);
+                }
+                catch(Exception)
+                {
+                    Console.WriteLine("Error");
+                }
+            }
+        }
+        Console.WriteLine("File was uploaded!");
+        
+
+    }
+
+    private async Task LoadFiles_(InputFileChangeEventArgs e)
+    {
+
+        var file = e.GetMultipleFiles().FirstOrDefault();
+        long maxFileSize = 200000 * 1024 * 10;
+        Stream streamFile;
+
+        if (file != null)
+        {
+            streamFile = file.OpenReadStream(maxFileSize);
+
+            byte[] buffer = new byte[1024];
+            byte[] bytesFile = new byte[file.Size];
+
+            int bytesRead;
+            long totalBytesRead = 0;
+
+            Console.WriteLine(file.Size);
+            while ((bytesRead = await streamFile.ReadAsync(buffer, 0, buffer.Length)) > 0)
+            {
+                try
+                {
+                    // buffer.CopyTo(bytesFile, totalBytesRead);
+                    Array.Copy(buffer, 0, bytesFile, totalBytesRead, bytesRead);
+                    totalBytesRead += bytesRead;
+                }
+                catch(Exception)
+                {
+                    Console.WriteLine(totalBytesRead);
+                    Console.WriteLine(bytesFile.Length);
+                }
+            }
+            streamFile.Close();
+
+
+            Stopwatch encStopwatch = new Stopwatch();
+            encStopwatch.Start();
+            FileParamsDto fileParams = await GetFileParams(bytesFile, file);
+            encStopwatch.Stop();
+            Console.WriteLine("Encryption time: " + encStopwatch.Elapsed);
+            encStopwatch.Reset();
+
+            string token = await LocalStorage.GetItemAsync<string>("token");
+            Http.DefaultRequestHeaders.Remove("Authorization");
+            Http.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+
+            //adaugam adresa proxy-ului
+            await UploadFileThroughProxy(fileParams);
+            
+            //cand decomentam proxy-ul trebuie sa comentam tot ce e in continuare
+
+            // Stopwatch stopwatch = new Stopwatch();
+            // stopwatch.Start();
+
+            // var result = await Http.PostAsJsonAsync("api/File/uploadFile", fileParams);
+            // if (result.IsSuccessStatusCode)
+            // {
+            //     FileMetaChallenge? fmc = result.Content.ReadFromJsonAsync<FileMetaChallenge>().Result;
+            //     if (fmc == null)
+            //         Console.WriteLine("E null\n");
+
+            //     string symKey = await LocalStorage.GetItemAsync<string>("Base64SymKey");
+            //     Stopwatch challengeStopwatch = new Stopwatch();
+            //     challengeStopwatch.Start();
+
+            //     //stopwatch.Stop();
+            //     FileResp userResp = await _cryptoService.GetFileResp(fmc, fileParams.base64EncFile, file.Name, symKey);
+            //     //stopwatch.Start();
+
+            //     challengeStopwatch.Stop();
+            //     Console.WriteLine("Challenge time: " + challengeStopwatch.Elapsed);
+            //     challengeStopwatch.Reset();
+
+            //     var res = await Http.PostAsJsonAsync("api/File/verifyFileChallenge", userResp);
+            //     stopwatch.Stop();
+            //     Console.WriteLine("Elapsed time: " + stopwatch.Elapsed);
+            //     stopwatch.Reset();
+            //     if (res.IsSuccessStatusCode)
+            //     {
+            //         var alertBox = await Swal.FireAsync(new SweetAlertOptions
+            //             {
+            //                 Title = "Success",
+            //                 Text = "File was uploaded!",
+            //                 Icon = SweetAlertIcon.Success,
+            //                 ShowCancelButton = false,
+            //                 ConfirmButtonText = "Ok"
+            //             });
+            //     }
+            //     else
+            //     {
+            //         var errorContent = await res.Content.ReadAsStringAsync();
+            //         var alertBox = await Swal.FireAsync(new SweetAlertOptions
+            //             {
+            //                 Title = "Error",
+            //                 Text = errorContent,
+            //                 Icon = SweetAlertIcon.Error,
+            //                 ShowCancelButton = false,
+            //                 ConfirmButtonText = "Ok"
+            //             });
+            //     }
+
+            // }
+            // else
+            // {
+            //     var errorContent = await result.Content.ReadAsStringAsync();
+
+            //     var alertBox = await Swal.FireAsync(new SweetAlertOptions
+            //         {
+            //             Title = "Error",
+            //             Text = errorContent,
+            //             Icon = SweetAlertIcon.Error,
+            //             ShowCancelButton = false,
+            //             ConfirmButtonText = "Ok"
+            //         });
+            // }
+            
+        }
+    }
+
+    private async Task UploadFileThroughProxy(FileParamsDto fileParams)
+    {
+        HttpClient httpClient = HttpServiceCustom.GetProxyClient();
+
+        string jwt = await LocalStorage.GetItemAsync<string>("token");
+        httpClient.DefaultRequestHeaders.Remove("Authorization");
+        httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + jwt);
+        httpClient.DefaultRequestHeaders.Add("Connection", "Keep-Alive");
+
+        Stopwatch stopwatch = new Stopwatch();
+        stopwatch.Start();
+        var result = await httpClient.PostAsJsonAsync("uploadFile", fileParams);
+        stopwatch.Stop();
+        Console.WriteLine("Elapsed time: " + stopwatch.Elapsed);
+        if (!result.IsSuccessStatusCode)
+        {
+            var errorContent = await result.Content.ReadAsStringAsync();
+
+            try
+            {
+                result.EnsureSuccessStatusCode();
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.Message);
+                var alertBox = await Swal.FireAsync(new SweetAlertOptions
+                    {
+                        Title = "Error",
+                        Text = e.Message,
+                        Icon = SweetAlertIcon.Error,
+                        ShowCancelButton = false,
+                        ConfirmButtonText = "Ok"
+                    });
+            }
+            // var alertBox = await Swal.FireAsync(new SweetAlertOptions
+            // {
+            //     Title = "Error",
+            //     Text = errorContent,
+            //     Icon = SweetAlertIcon.Error,
+            //     ShowCancelButton = false,
+            //     ConfirmButtonText = "Ok"
+            // });
+        }
+        else
+        {
+            var alertBox = await Swal.FireAsync(new SweetAlertOptions
+            {
+                Title = "Success",
+                Text = "File was uploaded!",
+                Icon = SweetAlertIcon.Success,
+                ShowCancelButton = false,
+                ConfirmButtonText = "Ok"
+            });
+        }
+
+    }
+}

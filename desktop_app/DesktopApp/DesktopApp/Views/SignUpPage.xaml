@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DesktopApp.SignUpPage"
+             Title=""
+             Shell.FlyoutBehavior="Disabled"
+             xmlns:viewModels="clr-namespace:DesktopApp.ViewModels">
+
+    <ContentPage.BindingContext>
+        <viewModels:SignUpViewModel />
+    </ContentPage.BindingContext>
+    
+    <StackLayout Padding="20" VerticalOptions="CenterAndExpand" MaximumWidthRequest="500">
+        <Label Text="Register Here" FontSize="24" HorizontalOptions="Center" Margin="0,0,0,20" />
+
+        <Entry Placeholder="Last Name" FontSize="18" Margin="0,0,0,10" Text ="{Binding LastName}"/>
+        <Entry Placeholder="First Name" FontSize="18" Margin="0,0,0,10" Text="{Binding FirstName}"/>
+        <Entry Placeholder="Email" FontSize="18" Margin="0,0,0,10" Text="{Binding Email}" />
+
+
+        <Entry Placeholder="Password" FontSize="18" IsPassword="True" Margin="0,0,0,20" Text="{Binding Password}"/>
+        <Entry Placeholder="Confirm Password" FontSize="18" IsPassword="True" Margin="0,0,0,20" Text="{Binding ConfirmPassword}"/>
+
+        <Button Text="Register" FontSize="20" BackgroundColor="#0078D4" TextColor="White" CornerRadius="10"  x:Name="registerButton" Clicked="registerButton_Clicked" />
+
+       
+    </StackLayout>
+
+</ContentPage>

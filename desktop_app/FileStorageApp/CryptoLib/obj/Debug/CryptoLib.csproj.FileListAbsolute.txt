@@ -1,0 +1,9 @@
+D:\LicentaProiect\FileStorageApp\CryptoLib\bin\Debug\CryptoLib.dll
+D:\LicentaProiect\FileStorageApp\CryptoLib\bin\Debug\CryptoLib.pdb
+D:\LicentaProiect\FileStorageApp\CryptoLib\bin\Debug\BouncyCastle.Crypto.dll
+D:\LicentaProiect\FileStorageApp\CryptoLib\bin\Debug\BouncyCastle.Crypto.xml
+D:\LicentaProiect\FileStorageApp\CryptoLib\obj\Debug\CryptoLib.csproj.AssemblyReference.cache
+D:\LicentaProiect\FileStorageApp\CryptoLib\obj\Debug\CryptoLib.csproj.CoreCompileInputs.cache
+D:\LicentaProiect\FileStorageApp\CryptoLib\obj\Debug\CryptoLib.dll
+D:\LicentaProiect\FileStorageApp\CryptoLib\obj\Debug\CryptoLib.pdb
+D:\LicentaProiect\FileStorageApp\CryptoLib\obj\Debug\CryptoLib.csproj.Up2Date

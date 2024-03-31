@@ -1,0 +1,83 @@
+is_global = true
+build_property.EnableAotAnalyzer = 
+build_property.EnableSingleFileAnalyzer = 
+build_property.EnableTrimAnalyzer = false
+build_property.IncludeAllContentForSelfExtract = 
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = browser
+build_property.RootNamespace = FileStorageApp.Client
+build_property.RootNamespace = FileStorageApp.Client
+build_property.ProjectDir = D:\REPO_FOR_ARTICLE\New_Repo\Secure_Data_Deduplication\desktop_app\FileStorageApp\FileStorageApp\Client\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\REPO_FOR_ARTICLE\New_Repo\Secure_Data_Deduplication\desktop_app\FileStorageApp\FileStorageApp\Client
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/REPO_FOR_ARTICLE/New_Repo/Secure_Data_Deduplication/desktop_app/FileStorageApp/FileStorageApp/Client/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/REPO_FOR_ARTICLE/New_Repo/Secure_Data_Deduplication/desktop_app/FileStorageApp/FileStorageApp/Client/Pages/Counter.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/REPO_FOR_ARTICLE/New_Repo/Secure_Data_Deduplication/desktop_app/FileStorageApp/FileStorageApp/Client/Pages/DownloadPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRG93bmxvYWRQYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/REPO_FOR_ARTICLE/New_Repo/Secure_Data_Deduplication/desktop_app/FileStorageApp/FileStorageApp/Client/Pages/FetchData.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmV0Y2hEYXRhLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/REPO_FOR_ARTICLE/New_Repo/Secure_Data_Deduplication/desktop_app/FileStorageApp/FileStorageApp/Client/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/REPO_FOR_ARTICLE/New_Repo/Secure_Data_Deduplication/desktop_app/FileStorageApp/FileStorageApp/Client/Pages/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/REPO_FOR_ARTICLE/New_Repo/Secure_Data_Deduplication/desktop_app/FileStorageApp/FileStorageApp/Client/Pages/Merge.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWVyZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/REPO_FOR_ARTICLE/New_Repo/Secure_Data_Deduplication/desktop_app/FileStorageApp/FileStorageApp/Client/Pages/NotAuthorized.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTm90QXV0aG9yaXplZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/REPO_FOR_ARTICLE/New_Repo/Secure_Data_Deduplication/desktop_app/FileStorageApp/FileStorageApp/Client/Pages/Register.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVnaXN0ZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/REPO_FOR_ARTICLE/New_Repo/Secure_Data_Deduplication/desktop_app/FileStorageApp/FileStorageApp/Client/Pages/Test.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVzdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/REPO_FOR_ARTICLE/New_Repo/Secure_Data_Deduplication/desktop_app/FileStorageApp/FileStorageApp/Client/Pages/UploadPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXBsb2FkUGFnZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/REPO_FOR_ARTICLE/New_Repo/Secure_Data_Deduplication/desktop_app/FileStorageApp/FileStorageApp/Client/Shared/SurveyPrompt.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/REPO_FOR_ARTICLE/New_Repo/Secure_Data_Deduplication/desktop_app/FileStorageApp/FileStorageApp/Client/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/REPO_FOR_ARTICLE/New_Repo/Secure_Data_Deduplication/desktop_app/FileStorageApp/FileStorageApp/Client/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-715x2vd4yb
+
+[D:/REPO_FOR_ARTICLE/New_Repo/Secure_Data_Deduplication/desktop_app/FileStorageApp/FileStorageApp/Client/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-se4emo5ydr

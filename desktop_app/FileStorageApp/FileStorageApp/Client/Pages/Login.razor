@@ -1,0 +1,97 @@
+﻿@page "/Login"
+@using FileStorageApp.Shared.Dto;
+@using FileStorageApp.Shared;
+@using Microsoft.AspNetCore.Authorization;
+@using Microsoft.AspNetCore.Components.Authorization;
+
+<h3>Login here</h3>
+
+
+<EditForm Model="@user" OnValidSubmit="LoginFunction">
+    <DataAnnotationsValidator />
+        <div class="form-group">
+            <label for="email">Email</label>
+            <InputText type="text" class="form-control" id="email" @bind-Value="user.Email" />
+            <ValidationMessage For="@(() => user.Email)" />
+        </div>
+        <div class="form-group">
+            <label for="pass">Password</label>
+            <InputText type="password" class="form-control" id="pass" @bind-Value="user.password" />
+            <ValidationMessage For="@(() => user.password)" />
+        </div>
+        <br>
+        <br>
+        <button type="submit" class="btn btn-primary">Login</button>
+    <ValidationSummary />
+    <br>
+    <br>
+</EditForm>
+
+@* <AuthorizeView Roles="client">
+    <Authorized>
+        <span>You're authorized </span>
+    </Authorized>
+    <NotAuthorized>
+        <span>You're not authorized, buddy.</span>
+    </NotAuthorized>
+</AuthorizeView> *@
+
+@code {
+    private LoginUser user = new LoginUser();
+    private CryptoService cryptoService = new CryptoService();
+
+    [CascadingParameter] private Task<AuthenticationState> authenticationStateTask { get; set; }
+
+    private bool isAuthenticated;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await authenticationStateTask;
+        isAuthenticated = authState.User.Identity.IsAuthenticated;
+
+        if (isAuthenticated)
+        {
+            // Redirect to the login page or another page for unauthenticated users
+            Navigation.NavigateTo("/uploadPage");
+        }
+    }
+
+    private async Task LoginFunction()
+    {
+        await LocalStorage.RemoveItemAsync("PublicKey");
+        await LocalStorage.RemoveItemAsync("PrivateKey");
+        await LocalStorage.RemoveItemAsync("Base64SymKey");
+        await LocalStorage.RemoveItemAsync("A");
+
+        var result = await Http.PostAsJsonAsync("api/User/login", user);
+        if (result.IsSuccessStatusCode)
+        {
+            Response loginResponse = await result.Content.ReadFromJsonAsync<Response>();
+            Console.WriteLine(loginResponse.Message);
+            if (loginResponse.Succes)
+            {
+                string token = loginResponse.AccessToken;
+                Console.WriteLine(token);
+                await LocalStorage.SetItemAsync("token", token);
+                await AuthStateProvider.GetAuthenticationStateAsync();
+
+
+                Navigation.NavigateTo("/uploadPage");
+            }
+        }
+        else
+        {
+            var errorContent = await result.Content.ReadAsStringAsync();
+
+            var alertBox = await Swal.FireAsync(new SweetAlertOptions
+                {
+                    Title = "Error",
+                    Text = errorContent,
+                    Icon = SweetAlertIcon.Error,
+                    ShowCancelButton = false,
+                    ConfirmButtonText = "Ok"
+                });
+        }
+
+    }
+}

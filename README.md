@@ -68,7 +68,7 @@ docker build -t celery .
 docker build -t proxy .
 ```
 
-You need to execute the following command in the __mysql_yaml__ folder:
+You need to execute the following command in the __web_app/mysql_yaml__ folder:
 ```
 docker-compose up -d
 ```
@@ -81,3 +81,35 @@ docker-compose up -d
 In the __web_app/FileStorageApp/FileStorageApp/Server/appsettings.json__ file, you will need to specify the container from Azure Blob Storage, the connection string for Azure, the connection string for the SQL Server database, aes key, aes iv, and secret for jwt.
 
 After completing these steps, you can run the application and begin using it.
+
+# Desktop App 
+
+This module is not yet complete.
+
+The proxy module requires Docker to be installed.
+
+In the __PythonProxy__ folder, in __.env__ file, you can modify the link for the main server and other settings.
+
+To install the project, begin by building the images for the proxy:
+- navigate to __desktop_app/celery_deploy__ and execute the command:
+```
+docker build -t celery . 
+```
+- navigate to __desktop_app/PythonProxy__ and execute the command:
+```
+docker build -t proxy .
+```
+
+You need to execute the following command in the __desktop_app/mysql_yaml__ folder:
+```
+docker-compose up -d
+```
+
+You can now execute the following command in the __desktop_app__ folder:
+```
+docker-compose up -d
+```
+
+In the __desktop_app/FileStorageApp/FileStorageApp/Server/appsettings.json__ file, you will need to specify the container from Azure Blob Storage, the connection string for Azure, the connection string for the SQL Server database, aes key, aes iv, and secret for jwt.
+
+After completing these steps, you can run the application and begin using it. The difference now is that the client app needs to be executed from the DesktopApp, the interface from FileStorageApp can no longer be utilized. 

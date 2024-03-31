@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:DesktopApp"
+             x:Class="DesktopApp.UploadPage"
+             Title="Upload Files"
+             xmlns:viewModels="clr-namespace:DesktopApp.ViewModels">
+
+    <ContentPage.BindingContext>
+        <viewModels:UploadPageViewModel/>
+    </ContentPage.BindingContext>
+
+        <StackLayout Padding="20">
+        <Label 
+            Text="Upload Files"
+            FontSize="24"
+            HorizontalOptions="Center" 
+            Margin="0,20,0,20"/>
+
+        <!-- File Picker Button -->
+        <Button Text="Select File"
+                Clicked="OnSelectFileClicked"
+                HorizontalOptions="FillAndExpand"
+                BackgroundColor="#007AFF"
+                TextColor="White"
+                Margin="0,0,0,20"/>
+
+        <Label Text="{Binding FileNamePicked}"
+               FontSize="20"
+               HorizontalOptions="Start"
+               Margin="0,0,0,20"
+               />
+
+        <!-- List of Selected Files -->
+        <CollectionView x:Name="selectedFilesCollection"
+                        SelectionMode="None"
+
+
+                        Margin="0,0,0,20">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="" 
+                               VerticalOptions="Center"/>
+                        <Button Text="Remove" 
+                                
+                                CommandParameter="{Binding .}"
+                                BackgroundColor="#FF3B30"
+                                TextColor="White"
+                                HorizontalOptions="End"
+                                WidthRequest="80"/>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Upload Button -->
+        <Button Text="Upload"
+                Clicked="OnUploadFileClicked"
+                HorizontalOptions="FillAndExpand"
+                BackgroundColor="#4CD964"
+                TextColor="White"
+                x:Name="uploadButton"
+                />
+    </StackLayout>
+</ContentPage>

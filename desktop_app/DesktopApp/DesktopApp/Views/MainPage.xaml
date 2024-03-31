@@ -1,0 +1,59 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DesktopApp.MainPage"
+             xmlns:local="clr-namespace:DesktopApp"
+             xmlns:viewModels="clr-namespace:DesktopApp.ViewModels">
+
+
+
+    <ContentPage.BindingContext>
+        <viewModels:MainWindowViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+
+        <StackLayout>
+            <Label Text="Here are your uploaded files: " FontSize="Large" HorizontalOptions="Center" Margin="0,0,0,0"/>
+            <!-- Titles Grid -->
+            <Grid Margin="0,60,0,0" Padding="20" BackgroundColor="DarkGray">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Text="File Name" Grid.Column="0" HorizontalOptions="Center" FontSize="Large" Margin="-150,0,0,0"/>
+                <Label Text="Upload Date" Grid.Column="1" HorizontalOptions="Center" FontSize="Large" Margin="-430,0,0,0"/>
+                <Label Text="Actions" Grid.Column="2" HorizontalOptions="Center" FontSize="Large" Margin="-300,0,0,0"/>
+            </Grid>
+
+            <!-- ListView -->
+            <ListView x:Name="FilesListView"
+                      ItemsSource="{Binding Files}" HorizontalOptions="Fill">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="20">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <!-- Data Bindings -->
+                                <Label Text="{Binding fileName}" Grid.Column="0" VerticalOptions="Center" Margin="0,0,0,0" HorizontalOptions="Center"/>
+                                <Label Text="{Binding uploadDate}" Grid.Column="1" VerticalOptions="Center" Margin="0,0,0,0" HorizontalOptions="Center"/>
+                                <Button Text="Download" CommandParameter="{Binding fileName}" BackgroundColor="#3498db" Clicked="OnDownloadClicked" Grid.Column="2" Margin="0,0,20,0" HorizontalOptions="Center"/>
+                                <Button Text="Send" BackgroundColor="#27ae60" Clicked="OnSendClicked" Grid.Column="3" Margin="0,0,20,0" HorizontalOptions="Center"/>
+                                <Button Text="Delete" BackgroundColor="#e74c3c" Clicked="OnDeleteClicked" Grid.Column="4" Margin="0,0,20,0" HorizontalOptions="Center"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

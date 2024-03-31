@@ -1,0 +1,15 @@
+﻿@page "/merge"
+
+<h3>Merge</h3>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    public int currentCount = 0;
+    
+    private async Task IncrementCount()
+    {
+        var result = await Http.GetStringAsync("User/test");
+        Console.WriteLine(result);
+    }
+}

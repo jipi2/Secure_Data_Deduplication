@@ -1,0 +1,12 @@
+D:\LicentaProiect\FileStorageApp\TestingConsole\bin\Debug\TestingConsole.exe.config
+D:\LicentaProiect\FileStorageApp\TestingConsole\bin\Debug\TestingConsole.exe
+D:\LicentaProiect\FileStorageApp\TestingConsole\bin\Debug\TestingConsole.pdb
+D:\LicentaProiect\FileStorageApp\TestingConsole\bin\Debug\BouncyCastle.Crypto.dll
+D:\LicentaProiect\FileStorageApp\TestingConsole\bin\Debug\CryptoLib.dll
+D:\LicentaProiect\FileStorageApp\TestingConsole\bin\Debug\CryptoLib.pdb
+D:\LicentaProiect\FileStorageApp\TestingConsole\bin\Debug\BouncyCastle.Crypto.xml
+D:\LicentaProiect\FileStorageApp\TestingConsole\obj\Debug\TestingConsole.csproj.AssemblyReference.cache
+D:\LicentaProiect\FileStorageApp\TestingConsole\obj\Debug\TestingConsole.csproj.CoreCompileInputs.cache
+D:\LicentaProiect\FileStorageApp\TestingConsole\obj\Debug\TestingConsole.csproj.CopyComplete
+D:\LicentaProiect\FileStorageApp\TestingConsole\obj\Debug\TestingConsole.exe
+D:\LicentaProiect\FileStorageApp\TestingConsole\obj\Debug\TestingConsole.pdb
