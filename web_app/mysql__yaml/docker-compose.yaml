@@ -1,0 +1,33 @@
+version: '3.11'
+
+services:
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - proxy-net
+
+  web:
+    image: proxy
+    container_name: fastapi
+    ports:
+      - "8000:8000"
+    networks:
+      - proxy-net
+    depends_on:
+      - redis
+      - celery_worker
+
+  celery_worker:
+    image: celery
+    container_name: celery
+    networks:
+      - proxy-net
+    depends_on:
+      - redis
+
+networks:
+  proxy-net:
+    external: true

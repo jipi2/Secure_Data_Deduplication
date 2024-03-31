@@ -16,7 +16,12 @@ docker build -t celery .
 docker build -t proxy .
 ```
 
-You can now execute the following command in the 'web_app' folder:
+You need to execute the following command in the __mysql_yaml__ folder:
+```
+docker-compose up -d
+```
+
+You can now execute the following command in the __web_app__ folder:
 ```
 docker-compose up -d
 ```
