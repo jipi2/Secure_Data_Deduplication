@@ -1,0 +1,2 @@
+ uvicorn main:app --reload --ssl-keyfile ./SSL_Folder/key_ca.prv --ssl-certfile ./SSL_Folder/FastApiServer.cer
+ celery -A tasks_ worker --pool=solo -l info

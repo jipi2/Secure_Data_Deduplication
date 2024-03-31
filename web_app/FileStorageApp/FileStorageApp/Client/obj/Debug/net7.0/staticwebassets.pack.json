@@ -1,0 +1,97 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\REPO_FOR_ARTICLE\\New_Repo\\Secure_Data_Deduplication\\web_app\\FileStorageApp\\FileStorageApp\\Client\\bin\\Debug\\net7.0\\wwwroot\\_framework\\blazor.webassembly.js",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js"
+    },
+    {
+      "Id": "D:\\REPO_FOR_ARTICLE\\New_Repo\\Secure_Data_Deduplication\\web_app\\FileStorageApp\\FileStorageApp\\Client\\obj\\Debug\\net7.0\\compressed\\qufx2parsw.gz",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js.gz"
+    },
+    {
+      "Id": "D:\\REPO_FOR_ARTICLE\\New_Repo\\Secure_Data_Deduplication\\web_app\\FileStorageApp\\FileStorageApp\\Client\\obj\\Debug\\net7.0\\scopedcss\\bundle\\FileStorageApp.Client.styles.css",
+      "PackagePath": "staticwebassets\\FileStorageApp.Client.styles.css"
+    },
+    {
+      "Id": "D:\\REPO_FOR_ARTICLE\\New_Repo\\Secure_Data_Deduplication\\web_app\\FileStorageApp\\FileStorageApp\\Client\\wwwroot\\FileDownload.js",
+      "PackagePath": "staticwebassets\\FileDownload.js"
+    },
+    {
+      "Id": "D:\\REPO_FOR_ARTICLE\\New_Repo\\Secure_Data_Deduplication\\web_app\\FileStorageApp\\FileStorageApp\\Client\\wwwroot\\css\\app.css",
+      "PackagePath": "staticwebassets\\css\\app.css"
+    },
+    {
+      "Id": "D:\\REPO_FOR_ARTICLE\\New_Repo\\Secure_Data_Deduplication\\web_app\\FileStorageApp\\FileStorageApp\\Client\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\REPO_FOR_ARTICLE\\New_Repo\\Secure_Data_Deduplication\\web_app\\FileStorageApp\\FileStorageApp\\Client\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "D:\\REPO_FOR_ARTICLE\\New_Repo\\Secure_Data_Deduplication\\web_app\\FileStorageApp\\FileStorageApp\\Client\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
+      "PackagePath": "staticwebassets\\css\\open-iconic"
+    },
+    {
+      "Id": "D:\\REPO_FOR_ARTICLE\\New_Repo\\Secure_Data_Deduplication\\web_app\\FileStorageApp\\FileStorageApp\\Client\\wwwroot\\css\\open-iconic\\ICON-LICENSE",
+      "PackagePath": "staticwebassets\\css\\open-iconic"
+    },
+    {
+      "Id": "D:\\REPO_FOR_ARTICLE\\New_Repo\\Secure_Data_Deduplication\\web_app\\FileStorageApp\\FileStorageApp\\Client\\wwwroot\\css\\open-iconic\\README.md",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\README.md"
+    },
+    {
+      "Id": "D:\\REPO_FOR_ARTICLE\\New_Repo\\Secure_Data_Deduplication\\web_app\\FileStorageApp\\FileStorageApp\\Client\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\REPO_FOR_ARTICLE\\New_Repo\\Secure_Data_Deduplication\\web_app\\FileStorageApp\\FileStorageApp\\Client\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.eot"
+    },
+    {
+      "Id": "D:\\REPO_FOR_ARTICLE\\New_Repo\\Secure_Data_Deduplication\\web_app\\FileStorageApp\\FileStorageApp\\Client\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.otf"
+    },
+    {
+      "Id": "D:\\REPO_FOR_ARTICLE\\New_Repo\\Secure_Data_Deduplication\\web_app\\FileStorageApp\\FileStorageApp\\Client\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.svg"
+    },
+    {
+      "Id": "D:\\REPO_FOR_ARTICLE\\New_Repo\\Secure_Data_Deduplication\\web_app\\FileStorageApp\\FileStorageApp\\Client\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.ttf"
+    },
+    {
+      "Id": "D:\\REPO_FOR_ARTICLE\\New_Repo\\Secure_Data_Deduplication\\web_app\\FileStorageApp\\FileStorageApp\\Client\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.woff"
+    },
+    {
+      "Id": "D:\\REPO_FOR_ARTICLE\\New_Repo\\Secure_Data_Deduplication\\web_app\\FileStorageApp\\FileStorageApp\\Client\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "D:\\REPO_FOR_ARTICLE\\New_Repo\\Secure_Data_Deduplication\\web_app\\FileStorageApp\\FileStorageApp\\Client\\wwwroot\\icon-192.png",
+      "PackagePath": "staticwebassets\\icon-192.png"
+    },
+    {
+      "Id": "D:\\REPO_FOR_ARTICLE\\New_Repo\\Secure_Data_Deduplication\\web_app\\FileStorageApp\\FileStorageApp\\Client\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.FileStorageApp.Client.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.FileStorageApp.Client.props",
+      "PackagePath": "build\\FileStorageApp.Client.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.FileStorageApp.Client.props",
+      "PackagePath": "buildMultiTargeting\\FileStorageApp.Client.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.FileStorageApp.Client.props",
+      "PackagePath": "buildTransitive\\FileStorageApp.Client.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

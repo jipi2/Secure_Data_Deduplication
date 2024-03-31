@@ -1,0 +1,12 @@
+version: '3.11'
+
+services:
+  web:
+    image: celery
+    container_name: celery
+    networks:
+      - proxy-net
+
+networks:
+  proxy-net:
+    external: true

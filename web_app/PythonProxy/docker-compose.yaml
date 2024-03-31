@@ -1,0 +1,45 @@
+version: '3.11'
+
+services:
+  mysql:
+    image: mysql
+    container_name: mysql
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: cache
+      MYSQL_ROOT_PASSWORD: root
+    networks:
+      - proxy-net
+
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - proxy-net
+
+  web:
+    image: proxy
+    container_name: fastapi
+    ports:
+      - "8000:8000"
+    networks:
+      - proxy-net
+    depends_on:
+      - redis
+      - celery_worker
+      - mysql
+
+  celery_worker:
+    image: celery
+    container_name: celery
+    networks:
+      - proxy-net
+    depends_on:
+      - redis
+
+networks:
+  proxy-net:
+    external: true

@@ -1,0 +1,128 @@
+﻿@page "/Register"
+
+<h3>Register here</h3>
+
+@if (isRegistered)
+{
+    <p>Registration successful!</p>
+}
+else
+{
+    <EditForm Model="@user" OnValidSubmit="RegisterFunction">
+        <DataAnnotationsValidator />
+        <div class="form-group">
+            <label for="lastName">last Name</label>
+            <InputText type="text" class="form-control" id="lastName" @bind-Value="user.LastName" />
+            <ValidationMessage For="@(() => user.LastName)" />
+        </div>
+        <div class="form-group">
+            <label for="firstName">First Name</label>
+            <InputText type="text" class="form-control" id="firstName" @bind-Value="user.FirstName" />
+            <ValidationMessage For="@(() => user.FirstName)" />
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <InputText type="email" class="form-control" id="email" @bind-Value="user.Email" />
+            <ValidationMessage For="@(() => user.Email)" />
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <InputText type="password" class="form-control" id="password" @bind-Value="user.Password" />
+            <ValidationMessage For="@(() => user.Password)" />
+        </div>
+        <div class="form-group">
+            <label for="confirmPass">Confirm Password</label>
+            <InputText type="password" class="form-control" id="confirmPass" @bind-Value="user.ConfirmPassword" />
+            <ValidationMessage For="@(() => user.ConfirmPassword)" />
+        </div>
+        <br>
+        <br>
+        <button type="submit" class="btn btn-primary">Register</button>
+        <ValidationSummary />
+    </EditForm>
+}
+
+@code {
+    private bool isRegistered;
+    private RegisterUser user = new RegisterUser();
+    private CryptoService _cryptoService = new CryptoService();
+
+    [CascadingParameter] private Task<AuthenticationState> authenticationStateTask { get; set; }
+
+    private bool isAuthenticated;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await authenticationStateTask;
+        isAuthenticated = authState.User.Identity.IsAuthenticated;
+
+        if (isAuthenticated)
+        {
+            // Redirect to the login page or another page for unauthenticated users
+            Navigation.NavigateTo("/uploadPage");
+        }
+    }
+
+    private async Task<RsaDto?> ComputeRSAKeysForUser(string password)
+    {
+        RsaDto? rsaDto = await _cryptoService.GetRsaDto(password);
+        return rsaDto;
+    }
+
+    private async Task RegisterFunction()
+    {
+        await LocalStorage.RemoveItemAsync("PublicKey");
+        await LocalStorage.RemoveItemAsync("PrivateKey");
+        await LocalStorage.RemoveItemAsync("Base64SymKey");
+        await LocalStorage.RemoveItemAsync("A");
+
+        RsaDto? rsaDto = await ComputeRSAKeysForUser(user.Password);
+        if(rsaDto == null)
+        {
+            var alertBox = await Swal.FireAsync(new SweetAlertOptions
+            {
+                Title = "Error",
+                Text = "Error while generating RSA keys",
+                Icon = SweetAlertIcon.Error,
+                ShowCancelButton = false,
+                ConfirmButtonText = "Ok"
+            });
+            return;
+        }
+
+        user.rsaKeys = rsaDto;
+        var result = await Http.PostAsJsonAsync("api/User/Register", user);
+
+        if (result.IsSuccessStatusCode)
+        {
+            Response registrationResponse = result.Content.ReadFromJsonAsync<Response>().Result;
+            isRegistered = true;
+            var alertBox = await Swal.FireAsync(new SweetAlertOptions
+                {
+                    Title = "Succes",
+                    Text = registrationResponse.Message,
+                    Icon = SweetAlertIcon.Success,
+                    ShowCancelButton = false,
+                    ConfirmButtonText = "Ok"
+                });
+
+            Navigation.NavigateTo("/Login");
+
+        }
+        else
+        {
+            var errorContent =  await result.Content.ReadAsStringAsync();
+
+            var alertBox = await Swal.FireAsync(new SweetAlertOptions
+            {
+                Title = "Error",
+                Text = errorContent,
+                Icon = SweetAlertIcon.Error,
+                ShowCancelButton = false,
+                ConfirmButtonText = "Ok"
+            });
+
+        }
+
+    }
+}
